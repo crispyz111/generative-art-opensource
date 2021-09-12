@@ -1,0 +1,27 @@
+{
+    "dna": "030902020202",
+    "name": "#0",
+    "description": "This is an NFT made by the coolest generative code.",
+    "image": "https://hashlips/nft/0",
+    "edition": 0,
+    "date": 1631446882303,
+    "attributes": [{
+        "name": "grey eye ball",
+        "rarity": "original"
+    }, {
+        "name": "green small",
+        "rarity": "original"
+    }, {
+        "name": "large",
+        "rarity": "original"
+    }, {
+        "name": "shapes",
+        "rarity": "original"
+    }, {
+        "name": "high bottom",
+        "rarity": "original"
+    }, {
+        "name": "high top",
+        "rarity": "original"
+    }]
+}

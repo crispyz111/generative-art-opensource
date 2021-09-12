@@ -9,8 +9,10 @@ const {
   editionSize,
   startEditionFrom,
   rarityWeights,
+  includeSign,
 } = require("./input/config.js");
 const console = require("console");
+const { NONAME } = require("dns");
 const canvas = createCanvas(width, height);
 const ctx = canvas.getContext("2d");
 
@@ -159,8 +161,13 @@ const getRarity = (_editionCount) => {
   return rarityForEdition[editionSize - _editionCount];
 };
 
-const writeMetaData = (_data) => {
-  fs.writeFileSync("./output/_metadata.json", _data);
+// write each nft meta data but also write a master _metadata
+const writeMetaData = (_data, editionCountInfo) => {
+  if (editionCountInfo === null) {
+    fs.writeFileSync("./output/_metadata.json", _data);
+  } else if (editionCountInfo != null) {
+    fs.writeFileSync(`./output/${editionCountInfo}.json`, _data);
+  }
 };
 
 // holds which dna has already been used during generation
@@ -230,11 +237,18 @@ const startCreating = async () => {
         attributesList.push(getAttributeForElement(element));
       });
       // add an image signature as the edition count to the top left of the image
-      signImage(`#${editionCount}`);
+      if (includeSign == true) {
+        signImage(`#${editionCount}`);
+      }
       // write the image to the output directory
       saveImage(editionCount);
+      // append metadata
       let nftMetadata = generateMetadata(newDna, editionCount, attributesList);
       metadataList.push(nftMetadata)
+      // write metadata for inidivudal file
+      //fs.writeFileSync(`./output/${editionCount}.json`, JSON.stringify(nftMetadata));
+      writeMetaData(JSON.stringify(nftMetadata), editionCount)
+      // logging
       console.log('- metadata: ' + JSON.stringify(nftMetadata));
       console.log('- edition ' + editionCount + ' created.');
       console.log();
@@ -242,7 +256,7 @@ const startCreating = async () => {
     dnaListByRarity[rarity].push(newDna);
     editionCount++;
   }
-  writeMetaData(JSON.stringify(metadataList));
+  writeMetaData(JSON.stringify(metadataList), null);
 };
 
 // Initiate code
