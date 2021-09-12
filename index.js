@@ -10,6 +10,7 @@ const {
   startEditionFrom,
   rarityWeights,
   includeSign,
+  SFBP,
 } = require("./input/config.js");
 const console = require("console");
 const { NONAME } = require("dns");
@@ -46,6 +47,7 @@ const drawBackground = () => {
 };
 
 // add metadata for individual nft edition
+/*
 const generateMetadata = (_dna, _edition, _attributesList) => {
   let dateTime = Date.now();
   let tempMetadata = {
@@ -59,13 +61,35 @@ const generateMetadata = (_dna, _edition, _attributesList) => {
   };
   return tempMetadata;
 };
+*/
+
+const generateMetadata = (_dna, _edition, _attributesList, _SFBP) => {
+  let dateTime = Date.now();
+  let tempMetadata = {
+    //dna: _dna.join(""),
+    name: `#${_edition}`,
+    description: description,
+    image: `${baseImageUri}/${_edition}`,
+    seller_fee_basis_points: _SFBP,
+    attributes: _attributesList,
+  };
+  return tempMetadata;
+};
+
 
 // prepare attributes for the given element to be used as metadata
 const getAttributeForElement = (_element) => {
   let selectedElement = _element.layer.selectedElement;
+  //console.log(selectedElement)
   let attribute = {
+    trait_type: _element.layer.property,
+    value: selectedElement.name,
+
+    /*
+    [_element.layer.property] : selectedElement.name,
     name: selectedElement.name,
     rarity: selectedElement.rarity,
+    */
   };
   return attribute;
 };
@@ -96,6 +120,7 @@ const constructLayerToDna = (_dna = [], _layers = [], _rarity) => {
   let mappedDnaToLayers = _layers.map((layer, index) => {
     let selectedElement = layer.elements.find(element => element.id === _dna[index]);
     return {
+      property: layer.id,
       location: layer.location,
       position: layer.position,
       size: layer.size,
@@ -215,6 +240,7 @@ const startCreating = async () => {
     // propagate information about required layer contained within config into a mapping object
     // = prepare for drawing
     let results = constructLayerToDna(newDna, layers, rarity);
+    //console.log(results[1])
     let loadedElements = [];
 
     // load all images to be used by canvas
@@ -235,6 +261,7 @@ const startCreating = async () => {
       elementArray.forEach((element) => {
         drawElement(element);
         attributesList.push(getAttributeForElement(element));
+        console.log(element.layer.property)
       });
       // add an image signature as the edition count to the top left of the image
       if (includeSign == true) {
@@ -243,7 +270,8 @@ const startCreating = async () => {
       // write the image to the output directory
       saveImage(editionCount);
       // append metadata
-      let nftMetadata = generateMetadata(newDna, editionCount, attributesList);
+      console.log(`sellerBP = ${SFBP}`)
+      let nftMetadata = generateMetadata(newDna, editionCount, attributesList, SFBP);
       metadataList.push(nftMetadata)
       // write metadata for inidivudal file
       //fs.writeFileSync(`./output/${editionCount}.json`, JSON.stringify(nftMetadata));
@@ -256,7 +284,7 @@ const startCreating = async () => {
     dnaListByRarity[rarity].push(newDna);
     editionCount++;
   }
-  writeMetaData(JSON.stringify(metadataList), null);
+  // writeMetaData(JSON.stringify(metadataList), null);
 };
 
 // Initiate code

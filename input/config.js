@@ -126,11 +126,13 @@ const baseImageUri = "https://hashlips/nft";
 // id for edition to start from
 const startEditionFrom = 0;
 // amount of NFTs to generate in edition
-const editionSize = 5;
+const editionSize = 9;
 // prefix to add to edition dna ids (to distinguish dna counts from different generation processes for the same collection)
 const editionDnaPrefix = 0
 // to sign the image or not
 const includeSign = false
+// seller_fee_basis_points
+const SFBP = 1000
 
 // create required weights
 // for each weight, call 'addRarity' with the id and from which to which element this rarity should be applied
@@ -167,4 +169,6 @@ module.exports = {
   editionSize,
   startEditionFrom,
   rarityWeights,
+  includeSign,
+  SFBP,
 };
