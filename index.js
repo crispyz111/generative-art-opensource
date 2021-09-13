@@ -68,9 +68,18 @@ const generateMetadata = (_dna, _edition, _attributesList, _SFBP) => {
   let tempMetadata = {
     //dna: _dna.join(""),
     name: `#${_edition}`,
+    symbol: "",
     description: description,
     image: `${baseImageUri}/${_edition}`,
     seller_fee_basis_points: _SFBP,
+    properties: {
+      creators: [{
+        address: "5GN3sGvtcRFEo99wbweUKBQSHX4fFFQaETiov4P8Z2uX",
+        share: 100}],
+      files: [{
+        uri: `${_edition}.png`,
+        type: 'image/png'}],
+      },
     attributes: _attributesList,
   };
   return tempMetadata;

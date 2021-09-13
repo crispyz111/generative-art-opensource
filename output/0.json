@@ -1,1 +1,36 @@
-{"name":"#0","description":"This is an NFT made by the coolest generative code.","image":"https://hashlips/nft/0","seller_fee_basis_points":1000,"attributes":[{"trait_type":"ball","value":"grey eye ball"},{"trait_type":"eye color","value":"green big"},{"trait_type":"iris","value":"large"},{"trait_type":"shine","value":"shapes"},{"trait_type":"bottom lid","value":"high bottom"},{"trait_type":"top lid","value":"high top"}]}
+{
+    "name": "#0",
+    "symbol": "",
+    "description": "This is an NFT made by the coolest generative code.",
+    "image": "https://hashlips/nft/0",
+    "seller_fee_basis_points": 1000,
+    "properties": {
+        "creators": [{
+            "address": "5GN3sGvtcRFEo99wbweUKBQSHX4fFFQaETiov4P8Z2uX",
+            "share": 100
+        }],
+        "files": [{
+            "uri": "0.png",
+            "type": "image/png"
+        }]
+    },
+    "attributes": [{
+        "trait_type": "ball",
+        "value": "white eye ball"
+    }, {
+        "trait_type": "eye color",
+        "value": "red big super rare"
+    }, {
+        "trait_type": "iris",
+        "value": "large"
+    }, {
+        "trait_type": "shine",
+        "value": "shapes"
+    }, {
+        "trait_type": "bottom lid",
+        "value": "high bottom"
+    }, {
+        "trait_type": "top lid",
+        "value": "high top"
+    }]
+}
