@@ -11,7 +11,7 @@ const {
   rarityWeights,
   includeSign,
   SFBP,
-} = require("./input/config.js");
+} = require("config.js");
 const console = require("console");
 const { NONAME } = require("dns");
 const canvas = createCanvas(width, height);
