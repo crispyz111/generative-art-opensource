@@ -2,7 +2,7 @@
     "name": "#0",
     "symbol": "",
     "description": "This is an NFT made by the coolest generative code.",
-    "image": "https://hashlips/nft/0",
+    "image": "0.png",
     "seller_fee_basis_points": 1000,
     "properties": {
         "creators": [{
@@ -12,14 +12,15 @@
         "files": [{
             "uri": "0.png",
             "type": "image/png"
-        }]
+        }],
+        "category": "image"
     },
     "attributes": [{
         "trait_type": "ball",
-        "value": "white eye ball"
+        "value": "grey eye ball"
     }, {
         "trait_type": "eye color",
-        "value": "red big super rare"
+        "value": "red small super rare"
     }, {
         "trait_type": "iris",
         "value": "large"

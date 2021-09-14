@@ -11,7 +11,7 @@ const {
   rarityWeights,
   includeSign,
   SFBP,
-} = require("config.js");
+} = require("./input/config.js");
 const console = require("console");
 const { NONAME } = require("dns");
 const canvas = createCanvas(width, height);
@@ -70,7 +70,8 @@ const generateMetadata = (_dna, _edition, _attributesList, _SFBP) => {
     name: `#${_edition}`,
     symbol: "",
     description: description,
-    image: `${baseImageUri}/${_edition}`,
+    //image: `${baseImageUri}/${_edition}`,
+    image: `${_edition}.png`,
     seller_fee_basis_points: _SFBP,
     properties: {
       creators: [{
@@ -78,7 +79,10 @@ const generateMetadata = (_dna, _edition, _attributesList, _SFBP) => {
         share: 100}],
       files: [{
         uri: `${_edition}.png`,
-        type: 'image/png'}],
+        //uri: 'image.png',
+        type: 'image/png'
+      }],
+      category: "image",
       },
     attributes: _attributesList,
   };
